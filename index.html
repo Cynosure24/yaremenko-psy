@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Психолог Яна Яременко</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ДИЗАЙН-СИСТЕМА --- */
+        :root {
+            --bg-color: #fffaf1;      
+            --text-color: #3c4043;    
+            --accent-color: #a387b3;  
+            --secondary-accent: #d4c19d; 
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 250, 241, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arimo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* --- ШАПКА ТА ЛОГО --- */
+        header {
+            background-color: var(--header-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(163, 135, 179, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo-img {
+            height: 70px; 
+            width: auto;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-left: 35px;
+            font-size: 1rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- ГОЛОВНИЙ ЕКРАН --- */
+        .hero {
+            padding-top: 180px;
+            background: radial-gradient(circle at 10% 20%, rgba(163, 135, 179, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: #2a2d2f;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #5f6368;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(163, 135, 179, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(163, 135, 179, 0.4);
+            background-color: #9276a3;
+        }
+
+        .hero-portrait-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero-portrait {
+            width: 100%; 
+            height: auto; 
+            border-radius: 30px;
+            box-shadow: 20px 20px 0 var(--secondary-accent); 
+            display: block;
+            object-fit: cover; 
+        }
+
+        /* --- РОЗДІЛ «ПРО МЕНЕ» --- */
+        .about {
+            background-color: rgba(212, 193, 157, 0.1); 
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-bottom: 25px;
+        }
+
+        /* --- РОЗДІЛ ПОСЛУГИ --- */
+        h2.section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .format-label {
+            display: inline-block;
+            background: var(--secondary-accent);
+            color: #fff;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid rgba(163, 135, 179, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(163, 135, 179, 0.1);
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2a2d2f;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .price-tag {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-color);
+            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        /* --- НОВІ СТИЛІ ДЛЯ БЛОКУ ВІДГУКІВ --- */
+        .reviews {
+            background-color: rgba(163, 135, 179, 0.03); /* Дуже легкий лавандовий фон */
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .review-item {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(163, 135, 179, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .review-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            object-fit: contain; /* Зберігає скріншот без обрізання */
+        }
+
+        /* --- КОНТАКТИ --- */
+        .contacts {
+            background-color: #fff;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-item {
+            margin-bottom: 30px;
+        }
+
+        .contact-item h5 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .contact-item p {
+            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
+
+        .contact-form-container input, 
+        .contact-form-container textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* --- МОБІЛЬНА ВЕРСІЯ --- */
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero-portrait-container {
+                max-width: 350px;
+                box-shadow: 15px 15px 0 var(--secondary-accent);
+            }
+            .hero-text h1 { font-size: 2.5rem; }
+            .contacts-grid { grid-template-columns: 1fr; }
+            header .container { height: auto; padding: 20px; flex-direction: column; }
+            nav { margin-top: 15px; }
+            nav a { margin: 0 10px; font-size: 0.9rem;}
+            .logo-img { height: 50px; }
+            .logo-text { font-size: 1.1rem; }
+            h2.section-title { font-size: 2.2rem; }
+            .reviews-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo-container">
+                <img src="logo.png" alt="Yaremenko Psy Logo" class="logo-img">
+                <span class="logo-text">Простір гармонії</span>
+            </a>
+            <nav>
+                <a href="#services">Послуги</a>
+                <a href="#about">Про мене</a>
+                <a href="#reviews">Відгуки</a> 
+                <a href="#contacts">Контакти</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>Ваш шлях до гармонії та внутрішнього світла</h1>
+                    <p>Психологічна підтримка, аромадіагностика та літотерапія для тих, хто прагне справжніх глибинних змін та самопізнання.</p>
+                    <a href="#contacts" class="btn">Записатися на сеанс</a>
+                </div>
+                <div class="hero-portrait-container">
+                    <img src="portrait.jpg" alt="Психолог Яременко" class="hero-portrait">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Про мене</h2>
+            <div class="about-content">
+                <p>Вітаю! Мене звати Яна Яременко. Я практикуючий спеціаліст у сфері ментального здоров'я, гармонізації стану та саморозвитку. Допомагаю знайти баланс, розібратися з внутрішніми запитами, виявити приховані ресурси та трансформувати життя.</p>
+                <p>У своїй роботі я поєдную класичне психологічне консультування з унікальними інструментами самопізнання (літотерапія, аромадіагностика, матриця долі, арт-терапія), що дозволяє досягати глибоких та стійких результатів.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Послуги та енергообмін</h2>
+
+            <span class="format-label">Індивідуальний формат</span>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>Психологічні консультації</h4>
+                    <p>Глибока індивідуальна робота з вашими особистими запитами, внутрішніми кризами, емоційним станом та цілями.</p>
+                    <div class="price-tag">1200 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Аромадіагностика</h4>
+                    <p>Дослідження психоемоційного стану за допомогою натуральних ефірних олій. Виявлення підсвідомих блоків та потреб.</p>
+                    <div class="price-tag">2500 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Експрес-аромадіагностика</h4>
+                    <p>Швидкий, але точний зріз вашого поточного стану через нюхові маркери. Швидкі підказки для корекції ресурсу.</p>
+                    <div class="price-tag">1700 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Літотерапія</h4>
+                    <p>Взаємодія з енергетикою натуральних каменів та мінералів для гармонізації внутрішнього стану та зняття напруги.</p>
+                    <div class="price-tag">2500 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Матриця долі</h4>
+                    <p>Розрахунок та детальний розбір вашого потенціалу за датою народження: таланти, фінанси, призначення, стосунки.</p>
+                    <div class="price-tag">2000 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Психологічний портрет</h4>
+                    <p>Комплексний аналіз особистості, сильних сторін, патернів поведінки та зон розвитку для глибшого саморозуміння.</p>
+                    <div class="price-tag">1200 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Арт терапія</h4>
+                    <p>М'яке вивільнення емоцій, блоків та страхів через творчість, малювання та візуальні образи. Підходить кожному.</p>
+                    <div class="price-tag">1500 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Аромадіагностика + літотерапія</h4>
+                    <p>Потужний комплексний сеанс, що поєднує силу ефірних олій та мінералів для максимального перезавантаження і гармонізації.</p>
+                    <div class="price-tag">3800 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Свічкотерапія (бокси)</h4>
+                    <p>Створення або підбір терапевтичних свічкових боксів під ваш індивідуальний запит для домашніх практик та релаксації.</p>
+                    <div class="price-tag">1200 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Коучингові ігри (індивідуальні)</h4>
+                    <p>Глибока трансформаційна робота із запитами у легкому, але ефективному ігровому форматі для індивідуального розбору.</p>
+                    <div class="price-tag">від 1700 ₴ до 5000 ₴</div>
+                </div>
+            </div>
+
+            <span class="format-label">Груповий та Парний формат</span>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>Жіночі кола</h4>
+                    <p>Безпечний та теплий простір однодумиць. Спілкування, підтримка, спільні медитативні та психологічні практики.</p>
+                    <div class="price-tag">від 3000 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Коучингові ігри (групові)</h4>
+                    <p>Трансформаційні ігри в невеликих групах. Можливість подивитися на свій запит через взаємодію з іншими учасниками.</p>
+                    <div class="price-tag">від 1500 ₴</div>
+                </div>
+                <div class="service-card">
+                    <h4>Парні консультації</h4>
+                    <p>Робота з парами, налагодження комунікації, вирішення сімейних та партнерських криз, відновлення взаєморозуміння.</p>
+                    <div class="price-tag">2000 ₴</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="section-title">Відгуки клієнтів</h2>
+            <div class="reviews-grid">
+                
+                <div class="review-item">
+                    <img src="review1.PNG" alt="Відгук 1" class="review-img">
+                </div>
+                
+                <div class="review-item">
+                    <img src="review2.PNG" alt="Відгук 2" class="review-img">
+                </div>
+                
+                <div class="review-item">
+                    <img src="review3.PNG" alt="Відгук 3" class="review-img">
+                </div>
+
+                <div class="review-item">
+                    <img src="review4.PNG" alt="Відгук 4" class="review-img">
+                </div>
+
+                <div class="review-item">
+                    <img src="review5.PNG" alt="Відгук 5" class="review-img">
+                </div>
+
+                <div class="review-item">
+                    <img src="review6.PNG" alt="Відгук 6" class="review-img">
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Залишайтеся на зв'язку</h2>
+            <div class="contacts-grid">
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <h5>Локація</h5>
+                        <p>Вінниця / Україна / Online / Offline</p>
+                    </div>
+                    <div class="contact-item">
+                        <h5>Телефон</h5>
+                        <p>+380 (97) 191 75 46</p>
+                    </div>
+                    <div class="contact-item">
+                        <h5>Instagram / Telegram</h5>
+                        <p>@yaremenko_psy</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/yaremenko_psy?igsh=cDBqcGFubHN5Mnlr" class="social-btn" style="background-color: #E1306C;" target="_blank">Instagram</a>
+                        <a href="https://t.me/yaremenko_psy" class="social-btn" style="background-color: #0088cc;" target="_blank">Telegram</a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <p style="margin-bottom: 30px; font-size: 1.1rem; color: #666;">Залиште ваші контактні дані, і я зв'яжуся з вами для обговорення зручного часу сесії.</p>
+                    
+                    <form onsubmit="alert('Дякуємо! Ваше повідомлення надіслано.'); return false;">
+                        <input type="text" placeholder="Ваше ім'я" required>
+                        <input type="text" placeholder="Телефон або Нікнейм" required>
+                        <textarea placeholder="Яка послуга вас цікавить?" rows="4"></textarea>
+                        <button type="submit" class="btn" style="width:100%; cursor:pointer; border:none;">Відправити запит</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 40px 0; text-align: center; border-top: 1px solid #eee;">
+        <p>&copy; 2026 Психолог Яна Яременко. Всі права захищені.</p>
+    </footer>
+
+</body>
+</html>
