@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
         /* --- ДИЗАЙН-СИСТЕМА --- */
         :root {
@@ -179,7 +181,7 @@
             margin-bottom: 25px;
         }
 
-        /* --- РОЗДІЛ ПОСЛУГИ --- */
+        /* --- РОЗДІЛ ПОСЛУГИ З МІНІ-КАРУСЕЛЯМИ --- */
         h2.section-title {
             font-size: 2.8rem;
             text-align: center;
@@ -212,6 +214,43 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Контейнер для слайдера всередині картки */
+        .service-slider {
+            width: 100%;
+            height: 400px; /* Висота картинок послуг */
+            position: relative;
+        }
+
+        .service-slider .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Стилізація маленьких стрілочок всередині карток */
+        .service-slider .swiper-button-next,
+        .service-slider .swiper-button-prev {
+            color: #ffffff !important;
+            background: rgba(0, 0, 0, 0.3);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            backdrop-filter: blur(2px);
+        }
+        
+        .service-slider .swiper-button-next::after,
+        .service-slider .swiper-button-prev::after {
+            font-size: 12px !important;
+        }
+
+        .service-card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .service-card:hover {
@@ -226,30 +265,34 @@
         }
 
         .service-card p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #666;
             margin-bottom: 25px;
             flex-grow: 1;
         }
 
         .price-tag {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-color);
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid #f5f5f5;
             padding-top: 20px;
         }
 
-        /* --- НОВІ СТИЛІ ДЛЯ БЛОКУ ВІДГУКІВ --- */
+        /* --- СТИЛІ ДЛЯ КАРУСЕЛІ ВІДГУКІВ --- */
         .reviews {
-            background-color: rgba(163, 135, 179, 0.03); /* Дуже легкий лавандовий фон */
+            background-color: rgba(163, 135, 179, 0.03);
+            position: relative;
         }
 
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            justify-content: center;
+        .reviews-slider-container {
+            position: relative;
+            padding: 0 50px; 
+        }
+
+        .reviews .swiper {
+            width: 100%;
+            padding-bottom: 50px !important; 
         }
 
         .review-item {
@@ -258,11 +301,10 @@
             border-radius: 20px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(163, 135, 179, 0.08);
-            transition: transform 0.3s ease;
-        }
-
-        .review-item:hover {
-            transform: translateY(-5px);
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .review-img {
@@ -270,7 +312,23 @@
             height: auto;
             border-radius: 12px;
             display: block;
-            object-fit: contain; /* Зберігає скріншот без обрізання */
+            object-fit: contain;
+        }
+
+        .reviews-slider-container .swiper-button-next, 
+        .reviews-slider-container .swiper-button-prev {
+            color: var(--accent-color) !important;
+            transform: translateY(-25px);
+        }
+        
+        .reviews-slider-container .swiper-button-next::after, 
+        .reviews-slider-container .swiper-button-prev::after {
+            font-size: 24px !important;
+            font-weight: bold;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent-color) !important;
         }
 
         /* --- КОНТАКТИ --- */
@@ -345,7 +403,8 @@
             .logo-img { height: 50px; }
             .logo-text { font-size: 1.1rem; }
             h2.section-title { font-size: 2.2rem; }
-            .reviews-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .reviews-slider-container { padding: 0 10px; } 
+            .service-slider { height: 200px; }
         }
     </style>
 </head>
@@ -360,7 +419,7 @@
             <nav>
                 <a href="#services">Послуги</a>
                 <a href="#about">Про мене</a>
-                <a href="#reviews">Відгуки</a> 
+                <a href="#reviews">Відгуки</a>
                 <a href="#contacts">Контакти</a>
             </nav>
         </div>
@@ -397,75 +456,232 @@
 
             <span class="format-label">Індивідуальний формат</span>
             <div class="services-grid">
+                
                 <div class="service-card">
-                    <h4>Психологічні консультації</h4>
-                    <p>Глибока індивідуальна робота з вашими особистими запитами, внутрішніми кризами, емоційним станом та цілями.</p>
-                    <div class="price-tag">1200 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-psy1.jpg" alt="Психологічні консультації 1"></div>
+                            <div class="swiper-slide"><img src="service-psy2.jpg" alt="Психологічні консультації 2"></div>
+                            <div class="swiper-slide"><img src="service-psy3.jpg" alt="Психологічні консультації 3"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Психологічні консультації</h4>
+                        <p>Глибока індивідуальна робота з вашими особистими запитами, внутрішніми кризами, емоційним станом та цілями.</p>
+                        <div class="price-tag">1200 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Аромадіагностика</h4>
-                    <p>Дослідження психоемоційного стану за допомогою натуральних ефірних олій. Виявлення підсвідомих блоків та потреб.</p>
-                    <div class="price-tag">2500 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-aroma1.jpg" alt="Аромадіагностика 1"></div>
+                            <div class="swiper-slide"><img src="service-aroma2.jpg" alt="Аромадіагностика 2"></div>
+                            <div class="swiper-slide"><img src="service-aroma3.jpg" alt="Аромадіагностика 3"></div>
+                            <div class="swiper-slide"><img src="service-aroma4.jpg" alt="Аромадіагностика 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Аромадіагностика</h4>
+                        <p>Дослідження психоемоційного стану за допомогою натуральних ефірних олій. Виявлення підсвідомих блоків та потреб.</p>
+                        <div class="price-tag">2500 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Експрес-аромадіагностика</h4>
-                    <p>Швидкий, але точний зріз вашого поточного стану через нюхові маркери. Швидкі підказки для корекції ресурсу.</p>
-                    <div class="price-tag">1700 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-express1.jpg" alt="Експрес-аромадіагностика 1"></div>
+                            <div class="swiper-slide"><img src="service-express2.jpg" alt="Експрес-аромадіагностика 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Експрес-аромадіагностика</h4>
+                        <p>Швидкий, але точний зріз вашого поточного стану через нюхові маркери. Швидкі підказки для корекції ресурсу.</p>
+                        <div class="price-tag">1700 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Літотерапія</h4>
-                    <p>Взаємодія з енергетикою натуральних каменів та мінералів для гармонізації внутрішнього стану та зняття напруги.</p>
-                    <div class="price-tag">2500 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-litho1.jpg" alt="Літотерапія 1"></div>
+                            <div class="swiper-slide"><img src="service-litho2.jpg" alt="Літотерапія 2"></div>
+                            <div class="swiper-slide"><img src="service-litho3.jpg" alt="Літотерапія 3"></div>
+                            <div class="swiper-slide"><img src="service-litho4.jpg" alt="Літотерапія 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Літотерапія</h4>
+                        <p>Взаємодія з енергетикою натуральних каменів та мінералів для гармонізації внутрішнього стану та зняття напруги.</p>
+                        <div class="price-tag">2500 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Матриця долі</h4>
-                    <p>Розрахунок та детальний розбір вашого потенціалу за датою народження: таланти, фінанси, призначення, стосунки.</p>
-                    <div class="price-tag">2000 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-matrix1.jpg" alt="Матриця долі 1"></div>
+                            <div class="swiper-slide"><img src="service-matrix2.jpg" alt="Матриця долі 2"></div>
+                            <div class="swiper-slide"><img src="service-matrix3.jpg" alt="Матриця долі 3"></div>
+                            <div class="swiper-slide"><img src="service-matrix4.jpg" alt="Матриця долі 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Матриця долі</h4>
+                        <p>Розрахунок та детальний розбір вашого потенціалу за датою народження: таланти, фінанси, призначення, стосунки.</p>
+                        <div class="price-tag">2000 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Психологічний портрет</h4>
-                    <p>Комплексний аналіз особистості, сильних сторін, патернів поведінки та зон розвитку для глибшого саморозуміння.</p>
-                    <div class="price-tag">1200 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-portrait1.jpg" alt="Психологічний портрет 1"></div>
+                            <div class="swiper-slide"><img src="service-portrait2.jpg" alt="Психологічний портрет 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Психологічний портрет</h4>
+                        <p>Комплексний аналіз особистості, сильних сторін, патернів поведінки та зон розвитку для глибшого саморозуміння.</p>
+                        <div class="price-tag">1200 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Арт терапія</h4>
-                    <p>М'яке вивільнення емоцій, блоків та страхів через творчість, малювання та візуальні образи. Підходить кожному.</p>
-                    <div class="price-tag">1500 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-art1.jpg" alt="Арт терапія 1"></div>
+                            <div class="swiper-slide"><img src="service-art2.jpg" alt="Арт терапія 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Арт терапія</h4>
+                        <p>М'яке вивільнення емоцій, блоків та страхів через творчість, малювання та візуальні образи. Підходить кожному.</p>
+                        <div class="price-tag">1500 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Аромадіагностика + літотерапія</h4>
-                    <p>Потужний комплексний сеанс, що поєднує силу ефірних олій та мінералів для максимального перезавантаження і гармонізації.</p>
-                    <div class="price-tag">3800 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-combo1.jpg" alt="Арома + Літотерапія 1"></div>
+                            <div class="swiper-slide"><img src="service-combo2.jpg" alt="Арома + Літотерапія 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Аромадіагностика + літотерапія</h4>
+                        <p>Потужний комплексний сеанс, що поєднує силу ефірних олій та мінералів для максимального перезавантаження і гармонізації.</p>
+                        <div class="price-tag">3800 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Свічкотерапія (бокси)</h4>
-                    <p>Створення або підбір терапевтичних свічкових боксів під ваш індивідуальний запит для домашніх практик та релаксації.</p>
-                    <div class="price-tag">1200 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-candle1.jpg" alt="Свічкотерапія 1"></div>
+                            <div class="swiper-slide"><img src="service-candle2.jpg" alt="Свічкотерапія 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Свічкотерапія (бокси)</h4>
+                        <p>Створення або підбір терапевтичних свічкових боксів під ваш індивідуальний запит для домашніх практик та релаксації.</p>
+                        <div class="price-tag">1200 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Коучингові ігри (індивідуальні)</h4>
-                    <p>Глибока трансформаційна робота із запитами у легкому, але ефективному ігровому форматі для індивідуального розбору.</p>
-                    <div class="price-tag">від 1700 ₴ до 5000 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-game-ind1.jpg" alt="Коучингові ігри інд 1"></div>
+                            <div class="swiper-slide"><img src="service-game-ind2.jpg" alt="Коучингові ігри інд 2"></div>
+                            <div class="swiper-slide"><img src="service-game-ind3.jpg" alt="Коучингові ігри інд 3"></div>
+                            <div class="swiper-slide"><img src="service-game-ind4.jpg" alt="Коучингові ігри інд 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Коучингові ігри (індивідуальні)</h4>
+                        <p>Глибока трансформаційна робота із запитами у легкому, але ефективному ігровому форматі для індивідуального розбору.</p>
+                        <div class="price-tag">від 1700 ₴ до 5000 ₴</div>
+                    </div>
                 </div>
             </div>
 
             <span class="format-label">Груповий та Парний формат</span>
             <div class="services-grid">
+                
                 <div class="service-card">
-                    <h4>Жіночі кола</h4>
-                    <p>Безпечний та теплий простір однодумиць. Спілкування, підтримка, спільні медитативні та психологічні практики.</p>
-                    <div class="price-tag">від 3000 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-circle1.jpg" alt="Жіночі кола 1"></div>
+                            <div class="swiper-slide"><img src="service-circle2.jpg" alt="Жіночі кола 2"></div>
+                            <div class="swiper-slide"><img src="service-circle3.jpg" alt="Жіночі кола 3"></div>
+                            <div class="swiper-slide"><img src="service-circle4.jpg" alt="Жіночі кола 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Жіночі кола</h4>
+                        <p>Безпечний та теплий простір однодумиць. Спілкування, підтримка, спільні медитативні та психологічні практики.</p>
+                        <div class="price-tag">від 3000 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Коучингові ігри (групові)</h4>
-                    <p>Трансформаційні ігри в невеликих групах. Можливість подивитися на свій запит через взаємодію з іншими учасниками.</p>
-                    <div class="price-tag">від 1500 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-game-group1.jpg" alt="Коучингові ігри груп 1"></div>
+                            <div class="swiper-slide"><img src="service-game-group2.jpg" alt="Коучингові ігри груп 2"></div>
+                            <div class="swiper-slide"><img src="service-game-group3.jpg" alt="Коучингові ігри груп 3"></div>
+                            <div class="swiper-slide"><img src="service-game-group4.jpg" alt="Коучингові ігри груп 4"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Коучингові ігри (групові)</h4>
+                        <p>Трансформаційні ігри в невеликих групах. Можливість подивитися на свій запит через взаємодію з іншими учасниками.</p>
+                        <div class="price-tag">від 1500 ₴</div>
+                    </div>
                 </div>
+
                 <div class="service-card">
-                    <h4>Парні консультації</h4>
-                    <p>Робота з парами, налагодження комунікації, вирішення сімейних та партнерських криз, відновлення взаєморозуміння.</p>
-                    <div class="price-tag">2000 ₴</div>
+                    <div class="swiper service-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="service-couple1.jpg" alt="Парні консультації 1"></div>
+                            <div class="swiper-slide"><img src="service-couple2.jpg" alt="Парні консультації 2"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="service-card-content">
+                        <h4>Парні консультації</h4>
+                        <p>Робота з парами, налагодження комунікації, вирішення сімейних та партнерських криз, відновлення взаєморозуміння.</p>
+                        <div class="price-tag">2000 ₴</div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -473,32 +689,35 @@
     <section id="reviews" class="reviews">
         <div class="container">
             <h2 class="section-title">Відгуки клієнтів</h2>
-            <div class="reviews-grid">
-                
-                <div class="review-item">
-                    <img src="review1.PNG" alt="Відгук 1" class="review-img">
+            
+            <div class="reviews-slider-container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="review-item">
+                                <img src="review1.png" alt="Відгук 1" class="review-img">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-item">
+                                <img src="review2.png" alt="Відгук 2" class="review-img">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-item">
+                                <img src="review3.png" alt="Відгук 3" class="review-img">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="review-item">
+                                <img src="review4.png" alt="Відгук 4" class="review-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                
-                <div class="review-item">
-                    <img src="review2.PNG" alt="Відгук 2" class="review-img">
-                </div>
-                
-                <div class="review-item">
-                    <img src="review3.PNG" alt="Відгук 3" class="review-img">
-                </div>
-
-                <div class="review-item">
-                    <img src="review4.PNG" alt="Відгук 4" class="review-img">
-                </div>
-
-                <div class="review-item">
-                    <img src="review5.PNG" alt="Відгук 5" class="review-img">
-                </div>
-
-                <div class="review-item">
-                    <img src="review6.PNG" alt="Відгук 6" class="review-img">
-                </div>
-                
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
@@ -511,7 +730,7 @@
                 <div class="contact-details">
                     <div class="contact-item">
                         <h5>Локація</h5>
-                        <p>Вінниця / Україна / Online / Offline</p>
+                        <p>Вінниця / Україна / Online</p>
                     </div>
                     <div class="contact-item">
                         <h5>Телефон</h5>
@@ -532,7 +751,7 @@
                     
                     <form onsubmit="alert('Дякуємо! Ваше повідомлення надіслано.'); return false;">
                         <input type="text" placeholder="Ваше ім'я" required>
-                        <input type="text" placeholder="Телефон або Нікнейм" required>
+                        <input type="text" placeholder="Телефон або Нікнейм в Telegram" required>
                         <textarea placeholder="Яка послуга вас цікавить?" rows="4"></textarea>
                         <button type="submit" class="btn" style="width:100%; cursor:pointer; border:none;">Відправити запит</button>
                     </form>
@@ -545,5 +764,68 @@
         <p>&copy; 2026 Психолог Яна Яременко. Всі права захищені.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        /* --- ІНІЦІАЛІЗАЦІЯ ВЕЛИКОЇ КАРУСЕЛІ ВІДГУКІВ --- */
+        var reviewsSwiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,       
+            spaceBetween: 20,       
+            loop: true,             
+            grabCursor: true,       
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: {
+                768: { slidesPerView: 2, spaceBetween: 30 },
+                1024: { slidesPerView: 3, spaceBetween: 30 }
+            }
+        });
+
+        /* --- ІНІЦІАЛІЗАЦІЯ МІНІ-КАРУСЕЛЕЙ ДЛЯ КОЖНОЇ ПОСЛУГИ --- */
+        var serviceSwipers = new Swiper(".service-slider", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            nested: true, /* Потрібно, щоб слайдери не конфліктували один з одним */
+            grabCursor: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            }
+        });
+
+        /* --- НАЛАШТУВАННЯ ВІДПРАВКИ ФОРМИ В TELEGRAM --- */
+        const TELEGRAM_TOKEN = 'СЮДИ_ВСТАВТЕ_ВАШ_ТОКЕН'; 
+        const CHAT_ID = 'СЮДИ_ВСТАВТЕ_ВАШ_ID'; 
+
+        document.querySelector('.contact-form-container form').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            const name = this.querySelector('input[placeholder="Ваше ім\'я"]').value;
+            const contact = this.querySelector('input[placeholder="Телефон або Нікнейм"]').value;
+            const message = this.querySelector('textarea').value;
+            
+            const text = `🔔 *Нова заявка з сайту!*\n\n👤 *Ім'я:* ${name}\n📱 *Контакт:* ${contact}\n💬 *Запит:* ${message || 'Не вказано'}`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' })
+                });
+                
+                if (response.ok) {
+                    alert('Дякую! Вашу заявку успішно надіслано. Я зв\'яжуся з вами найближчим часом.');
+                    this.reset();
+                } else {
+                    alert('Ой, щось пішло не так. Спробуйте ще раз.');
+                }
+            } catch (error) {
+                alert('Помилка з\'єднання.');
+            }
+            return false;
+        };
+    </script>
 </body>
 </html>
