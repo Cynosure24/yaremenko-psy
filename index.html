@@ -209,7 +209,6 @@
         .service-card {
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 35px;
             border: 1px solid rgba(163, 135, 179, 0.1);
             transition: all 0.3s ease;
             display: flex;
@@ -259,8 +258,8 @@
         }
 
         .service-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
             color: #2a2d2f;
         }
 
@@ -444,7 +443,7 @@
         <div class="container">
             <h2 class="section-title">Про мене</h2>
             <div class="about-content">
-                <p>Вітаю! Мене звати Яна Яременко. Я практикуючий спеціаліст у сфері ментального здоров'я, гармонізації стану та саморозвитку. Допомагаю знайти баланс, розібратися з внутрішніми запитами, виявити приховані ресурси та трансформувати життя.</p>
+                <p>Вітаю! Я практикуючий спеціаліст у сфері ментального здоров'я, гармонізації стану та саморозвитку. Допомагаю знайти баланс, розібратися з внутрішніми запитами, виявити приховані ресурси та трансформувати життя.</p>
                 <p>У своїй роботі я поєдную класичне психологічне консультування з унікальними інструментами самопізнання (літотерапія, аромадіагностика, матриця долі, арт-терапія), що дозволяє досягати глибоких та стійких результатів.</p>
             </div>
         </div>
@@ -713,16 +712,6 @@
                                 <img src="review4.png" alt="Відгук 4" class="review-img">
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <img src="review5.png" alt="Відгук 5" class="review-img">
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="review-item">
-                                <img src="review6.png" alt="Відгук 6" class="review-img">
-                            </div>
-                        </div>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -736,7 +725,6 @@
         <div class="container">
             <h2 class="section-title">Залишайтеся на зв'язку</h2>
             <div class="contacts-grid">
-                
                 <div class="contact-details">
                     <div class="contact-item">
                         <h5>Локація</h5>
@@ -758,8 +746,7 @@
                 
                 <div class="contact-form-container">
                     <p style="margin-bottom: 30px; font-size: 1.1rem; color: #666;">Залиште ваші контактні дані, і я зв'яжуся з вами для обговорення зручного часу сесії.</p>
-                    
-                    <form onsubmit="alert('Дякуємо! Ваше повідомлення надіслано.'); return false;">
+                    <form>
                         <input type="text" placeholder="Ваше ім'я" required>
                         <input type="text" placeholder="Телефон або Нікнейм в Telegram" required>
                         <textarea placeholder="Яка послуга вас цікавить?" rows="4"></textarea>
@@ -771,7 +758,7 @@
     </section>
 
     <footer style="padding: 40px 0; text-align: center; border-top: 1px solid #eee;">
-        <p>&copy; 2026 Психолог Яна Яременко. Всі права захищені.</p>
+        <p>&copy; 2026 Yaremenko Psy. Всі права захищені.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -805,8 +792,8 @@
         });
 
         /* --- НАЛАШТУВАННЯ ВІДПРАВКИ ФОРМИ В TELEGRAM --- */
-        const TELEGRAM_TOKEN = 'СЮДИ_ВСТАВТЕ_ВАШ_ТОКЕН'; 
-        const CHAT_ID = 'СЮДИ_ВСТАВТЕ_ВАШ_ID'; 
+        const TELEGRAM_TOKEN = '8918190255:AAF4hFMBClQuHB0W5Tle-UEp1Lwu3hAAa7Y'; 
+        const CHAT_ID = '881909477'; 
 
         document.querySelector('.contact-form-container form').onsubmit = async function(e) {
             e.preventDefault();
